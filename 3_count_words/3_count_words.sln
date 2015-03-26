@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3_count_words", "3_count_words\3_count_words.vcxproj", "{0C96551B-0B6B-4057-9AE4-8781CAA26304}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "count_words_tests", "count_words_tests\count_words_tests.vcxproj", "{88B953D1-AC97-46C2-9F9D-413AC489477C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C96551B-0B6B-4057-9AE4-8781CAA26304}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0C96551B-0B6B-4057-9AE4-8781CAA26304}.Debug|Win32.Build.0 = Debug|Win32
+		{0C96551B-0B6B-4057-9AE4-8781CAA26304}.Release|Win32.ActiveCfg = Release|Win32
+		{0C96551B-0B6B-4057-9AE4-8781CAA26304}.Release|Win32.Build.0 = Release|Win32
+		{88B953D1-AC97-46C2-9F9D-413AC489477C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{88B953D1-AC97-46C2-9F9D-413AC489477C}.Debug|Win32.Build.0 = Debug|Win32
+		{88B953D1-AC97-46C2-9F9D-413AC489477C}.Release|Win32.ActiveCfg = Release|Win32
+		{88B953D1-AC97-46C2-9F9D-413AC489477C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
