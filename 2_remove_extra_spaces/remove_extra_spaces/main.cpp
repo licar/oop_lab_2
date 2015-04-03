@@ -17,6 +17,7 @@ void GetIstream()
 		cout << "Enter string : ";
 		getline(cin, arg);
 		string strResult = RemoveExtraSpaces(arg);
+		
 		cout << strResult << endl;
 	} 
 	while (arg.length() != 0);
