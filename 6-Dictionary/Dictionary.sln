@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dictionary", "Dictionary\Dictionary.vcxproj", "{ADBA1E4E-E2B0-4414-9CB8-EE42B67F2C27}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dictionary_tests", "Dictionary_tests\Dictionary_tests.vcxproj", "{86889D5E-3F46-42A7-B57D-3F52193DCEDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADBA1E4E-E2B0-4414-9CB8-EE42B67F2C27}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ADBA1E4E-E2B0-4414-9CB8-EE42B67F2C27}.Debug|Win32.Build.0 = Debug|Win32
+		{ADBA1E4E-E2B0-4414-9CB8-EE42B67F2C27}.Release|Win32.ActiveCfg = Release|Win32
+		{ADBA1E4E-E2B0-4414-9CB8-EE42B67F2C27}.Release|Win32.Build.0 = Release|Win32
+		{86889D5E-3F46-42A7-B57D-3F52193DCEDE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{86889D5E-3F46-42A7-B57D-3F52193DCEDE}.Debug|Win32.Build.0 = Debug|Win32
+		{86889D5E-3F46-42A7-B57D-3F52193DCEDE}.Release|Win32.ActiveCfg = Release|Win32
+		{86889D5E-3F46-42A7-B57D-3F52193DCEDE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
