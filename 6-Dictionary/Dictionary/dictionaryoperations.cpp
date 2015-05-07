@@ -8,13 +8,6 @@
 
 using namespace std;
 
-void ToLowRegister(string const &strEng, string &strEngInLowReg)
-{
-	for (auto character : strEng)
-	{
-		strEngInLowReg.push_back(tolower(character));
-	}
-}
 
 void GetTranslate(string const &strEng, string &strRus)
 {
