@@ -22,11 +22,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	EnterWord(dictionary, dictWithSessionAppend);
 
-	char save;
-	cout << "would you like to save chanes Y/any";
-	cin >> save;
-
-	if (save == 'Y')
+	if (SaveChanges())
 	{
 		WriteSessionChangesToFile(fileName,
 			dictWithSessionAppend);

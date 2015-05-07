@@ -4,6 +4,7 @@
 #include "dictionaryoperations.h"
 #include <string>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -15,24 +16,27 @@ void ToLowRegister(string const &strEng, string &strEngInLowReg)
 	}
 }
 
-void AddToDictionary(map<string, string> &dictionary,
-	map<string, string> &dictWithSessionAppend, string const &strEng)
+void GetTranslate(string const &strEng, string &strRus)
 {
-	
-	string strRus;
-
-	cout << "Неизвестное слово" << strEng 
+	cout << "Неизвестное слово " << strEng
 		<< " Введите перевод или пустую строку для отказа. " << endl;
 
 	cout << "перевод :";
 	cin.ignore(256, '\n');
 	getline(cin, strRus);
+}
+
+bool AddToDictionary(map<string, string> &dictionary,
+	map<string, string> &dictWithSessionAppend, string const &strEng)
+{
+	string strRus;
+	GetTranslate(strEng, strRus);
 
 	if (strRus.empty())
 	{
 		cout << "Слово " << strEng
 			<< " было проигнорировано" << endl;
-		return;
+		return false;
 	}
 
 	dictWithSessionAppend[strEng] = strRus;
@@ -40,67 +44,59 @@ void AddToDictionary(map<string, string> &dictionary,
 
 	cout << "Слово " << strEng
 		<< " сохранено, как " << strRus << endl;
-}
-
-bool DictionaryLoaded(string const fileName,
-	map<string, string> &dictionary)
-{
-	char character;
-	string bufferRus;
-	string bufferEng;
-	bool fillEngBuffer = true;
-
-	FILE *fileDict = fopen(fileName.c_str(), "r");
-	
-	if (!fileDict)
-	{
-		cout << "Can't open file";
-		return false;
-	}
-	
-	while (!feof(fileDict))
-	{
-		character = getc(fileDict);
-		if (feof(fileDict) || (character == '\n'))
-		{
-			dictionary[bufferEng] = bufferRus;
-			fillEngBuffer = true;
-
-			bufferRus.clear();
-			bufferEng.clear();
-		}
-		else if (character == ' ')
-		{
-			fillEngBuffer = false;
-		}
-		else if (character == '[' ||
-			character == ']')
-		{
-			continue;
-		}
-		else
-		{
-			if (fillEngBuffer)
-			{
-				bufferEng.push_back(character);
-			}
-			else
-			{
-				bufferRus.push_back(character);
-			}
-		}
-	}
-
-	fclose(fileDict);
 	return true;
 }
 
-void WriteSessionChangesToFile(string const &dictName,
+void RemoveBrackets(string const &englishWithBrackets,
+	string &english)
+{
+	const char BRACKET_RIGHT = ']';
+	const char BRACKET_LEFT = '[';
+
+	for (auto character : englishWithBrackets)
+	{
+		if (character != BRACKET_LEFT &&
+			character != BRACKET_RIGHT)
+		{
+			english.push_back(character);
+		}
+	}
+}
+
+bool DictionaryLoaded(string const &fileName,
+	map<string, string> &dictionary)
+{
+	ifstream fileInput(fileName);
+
+	if (!fileInput)
+	{
+		return false;
+	}
+
+	string englishWithBrackets;
+	string english;
+	string russian;
+
+	while (!fileInput.eof())
+	{
+		fileInput >> englishWithBrackets;
+		RemoveBrackets(englishWithBrackets, english);
+		fileInput >> russian;
+		dictionary[english] = russian;
+		english.clear();
+		russian.clear();
+	}
+
+	fileInput.close();
+	return true;
+}
+
+void WriteSessionChangesToFile(string const &fileName,
 	map<string, string> const &dictWithSessionAppend)
 {
-	FILE *fileDict = fopen(dictName.c_str(), "a");
+	ofstream fileOutput(fileName, ios::app);
 	
-	if (!fileDict)
+	if (!fileOutput)
 	{
 		cout << "Changes will not save becouse can't open file";
 		return;
@@ -108,14 +104,10 @@ void WriteSessionChangesToFile(string const &dictName,
 	
 	for (auto translation : dictWithSessionAppend)
 	{
-		fputc('[', fileDict);
-		fputs(translation.first.c_str(), fileDict);
-		fputc(']', fileDict);
-		fputc(' ', fileDict);
-		fputs(translation.second.c_str(), fileDict);
-		fputc('\n', fileDict);
+		fileOutput << '[' << translation.first.c_str() <<
+			']' << ' '<< translation.second.c_str() << '\n';
 	}
-	fclose(fileDict);
+	fileOutput.close();
 }
 
 void PrintTranslation(map<string, string> &dictionary,
@@ -133,6 +125,19 @@ void PrintTranslation(map<string, string> &dictionary,
 		AddToDictionary(dictionary,
 			dictWithSessionAppend, strEngInLowReg);
 	}
+}
+
+bool SaveChanges()
+{
+	cout << "would you like to save chanes Y/any : ";
+	char isSave;
+	cin >> isSave;
+	
+	if (isSave)
+	{
+		return true;
+	}
+	return false;
 }
 
 void EnterWord(map<string, string> &dictionary,
