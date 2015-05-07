@@ -7,9 +7,7 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	setlocale(LC_ALL, "Russian");
-	string fileName;
-	cout << "Enter file name : ";
-	cin >> fileName;
+	string fileName = argv[1];
 
 	map<string, string> dictionary;
 	map<string, string> dictWithSessionAppend;
