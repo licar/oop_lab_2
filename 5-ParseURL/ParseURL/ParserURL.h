@@ -14,24 +14,15 @@ public:
 		FTP = 21
 	};
 
-	enum PartURL
-	{
-		protocolURL,
-		hostURL,
-		portURL,
-		documentURL
-	};
-
 	CParserURL(string const &url);
 	~CParserURL();
 
 	string GetURL() const;
-	int GetProtocol() const;
+	string GetProtocol() const;
 	int GetPort() const;
 	string GetHost() const;
 	string GetDocument() const;
 
-	bool Parse();
 	bool IsEmpty() const;
 
 	bool SetPort(string const &port);
@@ -40,8 +31,19 @@ public:
 	bool SetProtocol(string const &protocol);
 
 private:
+
+	bool Parse();
+
+	enum PartURL
+	{
+		protocolURL,
+		hostURL,
+		portURL,
+		documentURL
+	};
+
 	string m_url;
-	Protocol m_protocol;
+	string m_protocol;
 	int m_port;
 	string m_host;
 	string m_document;

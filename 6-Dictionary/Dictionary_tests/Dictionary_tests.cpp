@@ -12,3 +12,9 @@ BOOST_AUTO_TEST_CASE(CanLoadDictionary)
 	BOOST_CHECK(DictionaryLoaded("input.txt", dictionary));
 	BOOST_CHECK(!DictionaryLoaded("input1.txt", dictionary));
 }
+
+BOOST_AUTO_TEST_CASE(ToLowCase)
+{
+	string wordInHighCase = "WOrd";
+	BOOST_CHECK_EQUAL("word", ToLowRegister(wordInHighCase));
+}

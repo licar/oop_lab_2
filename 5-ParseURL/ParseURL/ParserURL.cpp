@@ -5,6 +5,10 @@
 CParserURL::CParserURL(string const &url)
 	:m_url(url)
 {
+	if (!IsEmpty)
+	{
+		Parse();
+	}
 }
 
 CParserURL::~CParserURL()
@@ -31,7 +35,7 @@ string CParserURL::GetHost() const
 	return m_host;
 }
 
-int CParserURL::GetProtocol() const
+string CParserURL::GetProtocol() const
 {
 	return m_protocol;
 }
@@ -54,7 +58,16 @@ string ToLowRegister(string const &str)
 
 bool CParserURL::SetProtocol(string const &protocol)
 {
-	string strProtocol = ToLowRegister(protocol);
+	string protocolInLowCase = ToLowRegister(protocol);
+	
+	if (protocolInLowCase == "http" ||
+		protocolInLowCase == "https" ||
+		protocolInLowCase == "ftp")
+	{
+		m_protocol = protocolInLowCase;
+		return true;
+	}
+	return false;
 
 	if (strProtocol == "http")
 	{
@@ -62,7 +75,6 @@ bool CParserURL::SetProtocol(string const &protocol)
 	}
 	else if (strProtocol == "https")
 	{
-		m_protocol = HTTPS;
 	}
 	else if (strProtocol == "ftp")
 	{
@@ -74,6 +86,7 @@ bool CParserURL::SetProtocol(string const &protocol)
 	}
 	return true;
 }
+
 
 bool CParserURL::SetHost(string const &host)
 {
@@ -173,13 +186,9 @@ bool CParserURL::Parse()
 			case DOUBLE_DOT:
 				partURL = portURL;
 				break;
-			case SLASH:
-				m_port = m_protocol;
-				partURL = documentURL;
-				break;
 			default:
-				m_port = m_protocol;
-				return true;
+				m_port = SetPort();
+				partURL = documentURL;
 				break;
 			}
 			break;

@@ -23,4 +23,6 @@ void EnterWord(map<string, string> &dictionary,
 
 void GetTranslate(string const &strEng, string &strRus);
 
+string ToLowRegister(string const &wordInHighCase);
+
 bool SaveChanges();

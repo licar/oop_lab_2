@@ -31,6 +31,15 @@ BOOST_AUTO_TEST_CASE(CanReturnWordInLowReg)
 BOOST_AUTO_TEST_CASE(CanFindIllegalWord)
 {
 	CFilter filter;
+	filter.ReadIllegalWords("input.txt");
 	BOOST_CHECK(filter.IsWordIllegal("sad"));
+	BOOST_CHECK(!filter.IsWordIllegal("way"));
+}
+
+BOOST_AUTO_TEST_CASE(CanReturnStringWithoutIllegalWords)
+{
+	CFilter filter;
+	filter.ReadIllegalWords("input.txt");
+	BOOST_CHECK_EQUAL(filter.RemoveIllegalWords("what sad was,sorrow"), "1");
 }
 

@@ -40,6 +40,17 @@ bool AddToDictionary(map<string, string> &dictionary,
 	return true;
 }
 
+
+string ToLowRegister(string const &wordInHighCase)
+{
+	string wordInLowCase;
+
+	for (auto character : wordInHighCase)
+	{
+		wordInLowCase.push_back(tolower(character));
+	}
+	return wordInLowCase;
+}
 void RemoveBrackets(string const &englishWithBrackets,
 	string &english)
 {
@@ -107,7 +118,7 @@ void PrintTranslation(map<string, string> &dictionary,
 	map<string, string> &dictWithSessionAppend, string const &strEng)
 {
 	string strEngInLowReg;
-	ToLowRegister(strEng, strEngInLowReg);
+	strEngInLowReg = ToLowRegister(strEng);
 
 	if (dictionary.find(strEngInLowReg) != dictionary.end())
 	{
@@ -126,7 +137,7 @@ bool SaveChanges()
 	char isSave;
 	cin >> isSave;
 	
-	if (isSave)
+	if (isSave == 'Y')
 	{
 		return true;
 	}

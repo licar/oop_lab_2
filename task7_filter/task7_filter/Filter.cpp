@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Filter.h"
 
-CFilter::CFilter()
+CFilter::CFilter(string const &fileWithIllegalsName ,string &strForFilter)
 {
 	m_separators.insert(' ');
 	m_separators.insert('\n');
@@ -15,6 +15,9 @@ CFilter::CFilter()
 	m_separators.insert(',');
 	m_separators.insert(':');
 	m_separators.insert(';');
+
+	ReadIllegalWords(fileWithIllegalsName);
+	RemoveIllegalWords(strForFilter);
 }
 
 CFilter::~CFilter()
@@ -58,23 +61,23 @@ bool CFilter::ReadIllegalWords(string const &fileName)
 	return true;
 }
 
-bool CFilter::IsWordIllegal(string const &word)
+bool CFilter::IsWordIllegal(string const &word) const
 {
-	string wordInLowReg = ToLowRegister(word);
+	string wordInLowCase = ToLowRegister(word);
 
-	if (m_separators.find(wordInLowReg) != m_separators.end())
+	if (m_illegalWords.find(wordInLowCase) == m_illegalWords.end())
 	{
 		return false;
 	}
 	return true;
 }
 
-/*string CFilter::RemoveIllegalWords(
+string CFilter::RemoveIllegalWords(
 	string const &strWithIllegalWords) const
 {
 	string strWithoutIllegalWords;
 	string buffer;
-	bool isWord;
+	bool isWord = false;
 
 	for (auto character : strWithIllegalWords)
 	{
@@ -84,21 +87,14 @@ bool CFilter::IsWordIllegal(string const &word)
 			{
 				isWord = true;
 			}
-
 			buffer.push_back(character);
 			continue;
 		}
-		
 		if (isWord)
 		{
-			if (!IsWordIllegal(buffer))
-			{
-				strWithoutIllegalWords += buffer;
-				strWithoutIllegalWords.push_back(character);
-				isWord = false;
-				continue;
-			}
+			if is
 		}
-		strWithoutIllegalWords.push_back(character);
+		
 	}
-}*/
+	return strWithIllegalWords;
+}
